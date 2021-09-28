@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id='app'>
+    <cpn
+      :number1="num1"
+      :number2="num2"
+      @changenum1="chnum1"
+      @changenum2="chnum2"
+    />
+  </div>
+
+  <template id="test">
+    <div>
+      <p>{{number1}}</p>
+      <input type="text" v-model="dnumber1">
+      <p>{{number2}}</p>
+      <input type="text" v-model="dnumber2">
+    </div>
+  </template>
+  <script src='../js/vue.js'></script>
+  <script>
+    const app = new Vue({
+      el: '#app',  //用于挂载要管理的元素
+      data: { //数据
+        num1: 0,
+        num2: 1
+      },
+      methods: {
+        chnum1(newValue){
+          this.num1 = parseFloat(newValue)
+        },
+        chnum2(newValue){
+          this.num2 = parseFloat(newValue)
+        }
+      },
+      components: {
+        cpn: {
+          template: "#test",
+          props:{
+            number1: Number,
+            number2: Number
+          },
+          data(){
+            return{
+              dnumber1: this.number1,
+              dnumber2: this.number2
+            }
+          },
+          watch: {
+            dnumber1(newValue){
+              this.dnumber2 = newValue * 100
+              this.$emit('changenum1',newValue)
+            },
+            dnumber2(newValue){
+              this.dnumber1 = newValue / 100
+              this.$emit('changenum2',newValue)
+            }
+          }
+        }
+      }
+    })
+  
+  </script>
+</body>
+</html>

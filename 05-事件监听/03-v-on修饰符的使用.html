@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id='app'>
+    <!-- .stop修饰符的使用 -->
+    <!-- 可以阻止冒泡,如下阻止divClick点击事件 -->
+    <div @click='divClick'>
+      aaaaa
+      <button @click.stop='btnClick'>按钮</button>
+    </div>
+
+    <br>
+    <!-- .prevent修饰符的使用 -->
+    <!-- 阻止默认行为 -->
+    <!-- 如下阻止表单默认的提交操作,后面可以根据自己的需要DIY提交 -->
+    <form action="baidu">
+      <input type="submit" value="提交" @click.prevent="submitClick">
+    </form>
+
+    <!-- @keyup监听键盘某个按键 -->
+    <!-- 这里监听所有按键 -->
+    监听任意按键:<input type="text" @keyup="keyUp">
+    <br>
+    <!-- 这里监听回车键 -->
+    监听回车键:<input type="text" @keyup.enter="keyUp">
+
+    <!-- .once修饰符的使用  顾名思义只能使用一次-->
+    <button @click.once="btn2Click">按钮2</button>
+
+  </div>
+  
+  <script src='../js/vue.js'></script>
+  <script>
+    const app = new Vue({
+      el: '#app',  //用于挂载要管理的元素
+      data:{ //数据
+        message: '你好啊'
+      },
+      methods: {
+        divClick(){
+          console.log('divClick')
+        },
+        btnClick(){
+          console.log('btnClick')
+        },
+        submitClick(){
+          console.log("submitClick")
+        },
+        keyUp(){
+          console.log("keyUp");
+        },
+        btn2Click(){
+          console.log("btn2Click");
+        }
+      }
+    })
+  
+  </script>
+</body>
+</html>

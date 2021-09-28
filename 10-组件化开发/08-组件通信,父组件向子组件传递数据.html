@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id='app'>
+    <cpn :once="sea"></cpn>
+  </div>
+  
+  <template id="text">
+    <div>
+      <ul>
+        <li v-for="item in once">{{item}}</li>
+        <li v-for="item in once1">{{item}}</li>
+        <li>{{once2}}</li>
+      </ul>
+    </div>
+  </template>
+  <script src='../js/vue.js'></script>
+  <script>
+    const cpn = {
+      template: `#text`,
+      // 1.这种传值方式比较简单,没有什么限制条件
+      // props: ['once']
+      props: {
+        // 这种传值方式可以限制传入的类型
+        once: Array,
+        once2: {
+          type: String,
+          // 此项为默认值,有个注意点当类型为对象或数组时,默认值必须为函数
+          default: '234'
+        },
+        once1: {
+          type: Array,
+          // 这里注意
+          // 这里因为类型为数组,所以默认值为函数
+          default(){
+            return ['asdf']
+          },
+          // 该项为TRUE时,则此项必传,否则报错
+          // required: true
+        }
+      }
+    }
+    const app = new Vue({
+      el: '#app',  //用于挂载要管理的元素
+      data: { //数据
+        sea: ['海贼王','海王','海尔兄弟']
+        
+      },
+      components: {
+        cpn 
+      }
+    })
+  
+  </script>
+</body>
+</html>

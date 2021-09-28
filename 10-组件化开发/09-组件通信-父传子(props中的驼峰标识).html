@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id='app'>
+    <!-- 在使用驼峰命名法时需要注意在传服父类的值时需要将驼峰命名法转化为短横线命名法 -->
+    <info :m-child-message="message" :c-info="text"></info>
+  </div>
+  
+  <template id="cpn" >
+    <!-- 这里必须要有一个根元素,例如这里的div -->
+    <div>
+      <h2>{{mChildMessage}}</h2>
+      <h2>{{cInfo}}</h2>
+    </div>
+  </template>
+  <script src='../js/vue.js'></script>
+  <script>
+    const info = {
+      template: '#cpn',
+      data(){
+        return{
+        }
+      },
+      props: {
+        // 注意这里的命名用了驼峰命名法
+        mChildMessage: {
+          type: String,
+          default: ''
+        },
+        cInfo:{
+          type: Object,
+          default(){
+            return {name: 'sss'}
+          }
+        }
+      }
+    }
+    const app = new Vue({
+      el: '#app',  //用于挂载要管理的元素
+      data: { //数据
+        message: '你好啊',
+        text: {
+          name: 'yrt',
+          id: 996,
+          password: 123456
+        }
+      },
+      components: {
+        info
+      }
+    })
+  
+  </script>
+</body>
+</html>

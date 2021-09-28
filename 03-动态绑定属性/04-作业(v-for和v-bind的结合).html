@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .active{
+      color: #ff0000;
+    }
+  </style>
+</head>
+<body>
+  <!-- 点击哪一项,哪一项将会变色 -->
+  <div id='app'>
+    <ul>
+      <li :class="i===index?active:''" v-for="(item,index) in movies" @click="change(index)">{{item}}</li>
+    </ul>
+  </div>
+  
+  <script src='../js/vue.js'></script>
+  <script>
+    const app = new Vue({
+      el: '#app',  //用于挂载要管理的元素
+      data:{ //数据
+        movies: ['火影忍者','海贼王','进击的巨人','死神'],
+        i: 0,
+        active: 'active'
+      },
+      methods:{
+        change(index){
+          this.i = index
+          console.log(this.i)
+        }
+      }
+    })
+  
+  </script>
+</body>
+</html>

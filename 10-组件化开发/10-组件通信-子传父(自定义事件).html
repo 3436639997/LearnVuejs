@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- 父组件 -->
+  <div id='app'>
+    <father @item-click="conClick"></father>
+  </div>
+  
+  <!-- 子组件 -->
+  <template id="child">
+    <div>
+      <button v-for="item in list"
+              @click="itemClick(item)">{{item.name}}</button>
+    </div>
+  </template>
+  <script src='../js/vue.js'></script>
+  <script>
+    // 子组件
+    const father = {
+      template: "#child",
+      data(){
+        return{
+          list: [
+            {
+              name:'热门推荐',
+              age: 12
+            },
+            {
+              name:'手机数码',
+              age: 12
+            },
+            {
+              name:'家用家电',
+              age: 12
+            },
+            {
+              name:'电脑办公',
+              age: 12
+            }
+          ]
+        }
+      },
+      methods:{
+        itemClick(item){
+          this.$emit('item-click',item)
+        }
+      }
+    }
+    // 根组件
+    const app = new Vue({
+      el: '#app',  //用于挂载要管理的元素
+      data: { //数据
+        message: '你好啊',
+      },
+      components:{
+        father
+      },
+      methods:{
+        conClick(item){
+          console.log(1,item);
+        }
+      }
+    })
+  
+  </script>
+</body>
+</html>

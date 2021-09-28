@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id='app'>
+    <cpn></cpn>
+    <cpn></cpn>
+    <cpn></cpn>
+    <div>
+    <cpn></cpn>
+    </div>
+  </div>
+  
+  <script src='../js/vue.js'></script>
+  <script>
+    const cpn= Vue.extend({
+      template: `
+        <div>
+          <h2>标题</h2>
+          <p>这是内容</p>  
+        </div>
+      `
+    })
+    Vue.component('cpn',cpn)
+    const app = new Vue({
+      el: '#app',  //用于挂载要管理的元素
+      data: { //数据
+        message: '你好啊'
+      }
+    })
+
+  </script>
+</body>
+</html>

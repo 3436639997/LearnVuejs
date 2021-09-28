@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id='app'>
+    <div>{{message}}</div>
+    <img v-bind:src="imgUrl"></img>
+    <a :href='url'>应该是百度</a>
+  </div>
+  
+  <script src='../js/vue.js'></script>
+  <script>
+    const app = new Vue({
+      el: '#app',  //用于挂载要管理的元素
+      data:{ //数据
+        message: '你好啊',
+        imgUrl: 'https://imgcps.jd.com/ling4/10021292212114/5bel5ZOB6LStUExVU-S4k-S6qw/5ruhMeWFg-S6qzguNeaKmA/p-5bd8253082acdd181d02f9ee/a5ca5142/cr/s/q.jpg',
+        url: 'https://baidu.com'
+      }
+    })
+  
+  </script>
+</body>
+</html>

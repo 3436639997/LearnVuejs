@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id='app'>
+    <cpn></cpn>
+  </div>
+  
+  <template id="text">
+    <div>
+      <!-- 注意这里的title是读不到根组件中的title的,只能读到自己组件中的title -->
+      <h2>{{title}}</h2>
+      <p>哈哈哈哈哈哈哈</p>
+    </div>
+  </template>
+  <script src='../js/vue.js'></script>
+  <script>
+    const cpn = {
+      template: `#text`,
+      data(){
+        return {
+          title: '局部标题'
+        }
+      }
+    }
+    const app = new Vue({
+      el: '#app',  //用于挂载要管理的元素
+      data: { //数据
+        title: '全局标题'
+      },
+      components:{
+        cpn
+      }
+    })
+  
+  </script>
+</body>
+</html>

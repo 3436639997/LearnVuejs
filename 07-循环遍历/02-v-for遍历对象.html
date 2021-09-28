@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id='app'>
+    <ul>
+      <li v-for="item in info">{{item}}</li>
+    </ul>
+
+    <ul>
+      <li v-for="(item,key) in info">{{key}}-{{item}}</li>
+    </ul>
+    <!-- 这种不常用,一般index的会用在数组中而不是对象中 -->
+    <ul>
+      <li v-for="(item,key,index) in info">{{index}}-{{key}}-{{item}}</li>
+    </ul>
+  </div>
+  
+  <script src='../js/vue.js'></script>
+  <script>
+    const app = new Vue({
+      el: '#app',  //用于挂载要管理的元素
+      data: { //数据
+      info:{
+          name: 'tangyishao',
+          age: 20,
+          height: 1.88
+        }
+      }
+    })
+  
+  </script>
+</body>
+</html>

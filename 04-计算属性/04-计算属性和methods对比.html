@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id='app'>
+    <div>{{fullname}}</div>
+    <div>{{fullname}}</div>
+    <div>{{fullname}}</div>
+    <div>{{fullname}}</div>
+    <div>{{getfullname()}}</div>
+    <div>{{getfullname()}}</div>
+    <div>{{getfullname()}}</div>
+    <div>{{getfullname()}}</div>
+    <div>{{getfullname()}}</div>
+    <div>{{getfullname()}}</div>
+  </div>
+  
+  <script src='../js/vue.js'></script>
+  <script>
+    const app = new Vue({
+      el: '#app',  //用于挂载要管理的元素
+      data:{ //数据
+        firstname: '逸少',
+        lastname: '唐'
+      },
+      //methods中的方法每次被调用时都不管里面的数值有没有发生变化都会执行一遍代码
+      methods: {
+        getfullname(){
+          console.log('执行一次getfullname');
+          return this.firstname + ' ' + this.lastname
+        }
+      },
+      // 区别在于,computed中存在缓存如果里面的值没有发生变化时,计算属性只会执行一次代码将计算后的值放入缓存,
+      // 在里面的值未发生改变时被调用会直接使用缓存,不会再次执行代码,不会做多余的计算性能更强
+      // 计算属性更适用于处理一下数据,使数据发生一些变化时,最好使用计算属性
+      computed: {
+        fullname(){
+          console.log('执行一次fullname');
+          return this.firstname + ' ' + this.lastname
+        }
+      }
+    })
+  
+  </script>
+</body>
+</html>

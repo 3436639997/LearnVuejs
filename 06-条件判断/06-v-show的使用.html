@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id='app'>
+    <!-- 当v-show中为false时相当于子啊元素中添加了display:none的属性,但元素不本身并不会被销毁 -->
+    <div v-show="isShow">{{message}}</div>
+    <!-- 当v-if中的值为false时,等于元素本身就已经被销毁了,当需要频繁的切换时推荐使用v-show,切换只有一次时推荐使用v-if-->
+    <div v-if="isShow">{{message}}</div>
+    <button @click="isShow = !isShow">切换</button>
+  </div>
+  
+  <script src='../js/vue.js'></script>
+  <script>
+    const app = new Vue({
+      el: '#app',  //用于挂载要管理的元素
+      data: { //数据
+        message: '你好啊',
+        isShow: true
+      }
+    })
+  
+  </script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id='app'>
+    <cpn :number1="num1"
+         :number2="num2"
+         @channum1="first"
+         @channum2="second"></cpn>
+  </div>
+  
+  <template id="text">
+    <div>
+      <p>props:{{number1}}</p>
+      <p>data:{{dnumber1}}</p>
+      <input type="text" :value="dnumber1" @input="changeNumber1">
+      <p>props:{{number2}}</p>
+      <p>data:{{dnumber2}}</p>
+      <input type="text" :value="dnumber2" @input="changeNumber2">
+    </div>
+  </template>
+  <script src='../js/vue.js'></script>
+  <script>
+    const cpn = {
+      template: "#text",
+      data(){
+        return{
+          dnumber1: this.number1,
+          dnumber2: this.number2
+        }
+      },
+      props:{
+        number1: Number,
+        number2: Number
+      },
+      methods:{
+        changeNumber1(event){
+          this.dnumber1 = event.target.value
+          this.$emit('channum1',this.dnumber1)
+
+          this.dnumber2 = this.dnumber1 * 100
+          this.$emit('channum2',this.dnumber2)
+        },
+        changeNumber2(event){
+          this.dnumber2 = event.target.value
+          this.$emit('channum2',this.dnumber2)
+
+          this.dnumber1 = this.dnumber2 / 100
+          this.$emit('channum1',this.dnumber1)
+        }
+      }
+    }
+    const app = new Vue({
+      el: '#app',  //用于挂载要管理的元素
+      data: { //数据
+        num1: 0,
+        num2: 1
+      },
+      methods:{
+        first(dnumber1){
+          this.num1 = parseFloat(dnumber1)
+        },
+        second(dnumber2){
+          this.num2 = parseFloat(dnumber2)
+        }
+      },
+      components:{
+        cpn
+      }
+    })
+  </script>
+</body>
+</html>

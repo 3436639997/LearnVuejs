@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id='app'>
+    <table>
+      <tr v-for="(item,index) in list">
+        <td><input type="text" :value="list[index].name" @input="addName(index,$event)"></td>
+        <td><input type="text" :value="list[index].address" @input="addAddress(index,$event)"></td>
+        <td><input type="text" :value="list[index].other" @input="addOther(index,$event)"></td>
+      </tr>
+    </table>
+    <button @click="add">增加</button>
+  </div>
+  
+  <script src='../js/vue.js'></script>
+  <script>
+    const app = new Vue({
+      el: '#app',  //用于挂载要管理的元素
+      data: { //数据
+        list: [
+          {
+            name: '',
+            address: '',
+            other: ''
+          }
+        ]
+      },
+      methods: {
+        add(){
+          this.list.push({
+            name: '',
+            address: '',
+            other: ''
+          })
+        },
+        addName(index,$event){
+          this.list[index].name=$event.target.value
+        },
+        addAddress(index,$event){
+          this.list[index].address=$event.target.value
+        },
+        addOther(index,$event){
+          this.list[index].other=$event.target.value
+        }
+      }
+    })
+  
+  </script>
+</body>
+</html>

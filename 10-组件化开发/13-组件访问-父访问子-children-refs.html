@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id='app'>
+    <cpn></cpn>
+    <cpn></cpn>
+    <cpn></cpn>
+    <!-- 假设中间多加了几个组件,那么$children中就需要修改需要的组件在$children[i]中的i(下面的组件尚未注册仅仅只是演示作用) -->
+    <my-cpn></my-cpn>
+    <cpn ref="aaa"></cpn>
+    <button @click="itemClick">按钮</button>
+  </div>
+  
+  <script type="text/x-tempalte" id="cpn">
+    <div>
+      <p>这是子组件</p>
+    </div>
+  </script>
+  <script src='../js/vue.js'></script>
+  <script>
+    const app = new Vue({
+      el: '#app',  //用于挂载要管理的元素
+      data: { //数据
+      },
+      methods: {
+        itemClick(){
+          // 1.$children 数组类型
+          // 使用$children可以直接在父组件中访问所有子组件中的元素,单数通常这个方法用于访问全部子元素用
+          // 如果只访问一个元素,由于children中是按数组排列的,以及修改的原因,可能会经常修改children中的需要的组件的先后顺序
+          // console.log(this.$children);
+          // this.$children[0].showMessage() 
+          // for(let c of this.$children){
+          //   console.log(c.name);
+          //   c.showMessage
+          // }
+
+          // 2.$refs => 对象类型 只会显示用ref定义过的组件
+          // 不会因为组件的位置改变二改变,直接用ref跟元素进行绑定
+          // 比较常用
+          console.log(this.$refs);
+          this.$refs.aaa.showMessage()
+          console.log(this.$refs.aaa.name);
+        }
+      },
+      components: {
+        cpn: {
+          template: "#cpn",
+          data(){
+            return{
+              name: 'tys'
+            }
+          },
+          methods: {
+            showMessage(){
+              console.log("这是子组件");
+            }
+          }
+        }
+      }
+    })
+  
+  </script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id='app'>
+    <cpn></cpn>
+    <cpn>
+      <!-- 通过slot-scope获取子组件slot中传递过来的值 -->
+      <template slot-scope="slot">
+        <!-- <span v-for="item in slot.data123">{{item}}</span> -->
+        <span>{{slot.data123.join(' - ')}}</span>
+      </template>
+    </cpn>
+  </div>
+  
+  <template id="cpn">
+    <div>
+      <slot :data123="pLanguage">
+        <ul>
+          <li v-for="item in pLanguage">{{item}}</li>
+        </ul>
+      </slot>
+    </div>
+  </template>
+  <script src='../js/vue.js'></script>
+  <script>
+    const app = new Vue({
+      el: '#app',  //用于挂载要管理的元素
+      data: { //数据
+        message: '你好啊'
+      },
+      components: {
+        cpn: {
+          template: '#cpn',
+          data(){
+            return{
+              pLanguage: ['C++','Java','Python','C#','GO']
+            }
+          }
+        }
+      }
+    })
+  
+  </script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+  <div id='app'>
+    <cpn></cpn>
+    <cpn><p>嘿嘿嘿嘿</p></cpn>
+    <cpn><span>呵呵呵呵</span></cpn>
+    <cpn>
+      <p>这里是我的</p>
+      <span><i>不,是我的</i></span>
+    </cpn>
+    <cpn></cpn>
+  </div>
+  
+  <!-- 插槽的基本使用<slot></slot>
+       默认值:只需在组件中的对应插槽中加入元素即可
+      有多个值也会一起将slot替换掉 -->
+
+  <template id="cpn">
+    <div>
+      <h2>我是组件</h2>
+      <p>我是组件,哈哈哈哈</p>
+      <slot><button>按钮</button></slot>
+    </div>
+  </template>
+  <script src='../js/vue.js'></script>
+  <script>
+    const app = new Vue({
+      el: '#app',  //用于挂载要管理的元素
+      data: { //数据
+        message: '你好啊'
+      },
+      components: {
+        cpn: {
+          template: "#cpn",
+
+        }
+      }
+    })
+  
+  </script>
+</body>
+</html>

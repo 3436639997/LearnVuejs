@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .active{
+      color: #ff0000;
+    }
+    .line{
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div id='app'>
+    <div class="titile" :class="{active: isactive,line: isline}">{{message}}</div>
+    <div :class="clas()">{{message}}</div>
+    <button @click='change'>按下变色</button>
+  </div>
+  
+  <script src='../js/vue.js'></script>
+  <script>
+    const app = new Vue({
+      el: '#app',  //用于挂载要管理的元素
+      data:{ //数据
+        message: '你好啊',
+        active: 'active',
+        isactive: true,
+        isline: true
+      },
+      methods:{
+        change(){
+          this.isactive = !this.isactive
+        },
+        clas(){
+          return {active: this.isactive,line: this.isline}
+        }
+      }
+    })
+  
+  </script>
+</body>
+</html>

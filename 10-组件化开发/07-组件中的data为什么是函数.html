@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id='app'>
+    <btn></btn>
+    <btn></btn>
+    <bad></bad>
+    <bad></bad>
+  </div>
+  
+  <template id="such">
+    <div>
+      <div>计数器: {{counter}}</div>
+      <button @click="decrement">-</button>
+      <button @click="increment">+</button>
+    </div>
+  </template>
+  <template id="bad">
+    <div>
+      <div>计数器: {{counter}}(模拟data为对象的情况)</div>
+      <button @click="decrement">-</button>
+      <button @click="increment">+</button>
+    </div>
+  </template>
+  <script src='../js/vue.js'></script>
+  <script>
+    Vue.component('btn',{
+      template: `#such`,
+      // 这里的data必须是函数而不能像根节点一样是对象
+      // 因为组件需要重复调用如果是对象泽无法做到每个组件内的数值独立
+      data(){
+        return{
+          counter: 0
+        }
+      },
+      methods:{
+        increment(){
+          this.counter++
+        },
+        decrement(){
+          this.counter--
+        }
+      }
+    })
+    const obj = {
+      counter: 0
+    }
+    const app = new Vue({
+      el: '#app',  //用于挂载要管理的元素
+      components:{
+        'bad': {
+          template: `#bad`,
+          // 这里通过一个让data返一个全局中的对象来模拟data为对象时的情况
+          data(){
+            return obj
+          },
+          methods:{
+            increment(){
+              this.counter++
+            },
+            decrement(){
+              this.counter--
+            }
+          }
+        }
+      }
+    })
+  
+  </script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id='app'>
+    <div>{{message}}</div>
+    <cpn @crement="crease"></cpn>
+  </div>
+  
+  <template id="btn">
+    <div>
+      <button @click="decrement">-</button>
+      <button @click="increment">+</button>
+    </div>
+  </template>
+  <script src='../js/vue.js'></script>
+  <script>
+    const cpn = {
+      template: "#btn",
+      data(){
+        return{
+          counter: 0
+        }
+      },
+      methods:{
+        increment(){
+          this.counter++
+          this.$emit("crement",this.counter)
+        },
+        decrement(){
+          this.counter--
+          this.$emit("crement",this.counter)
+        }
+      }
+    }
+    const app = new Vue({
+      el: '#app',  //用于挂载要管理的元素
+      data: { //数据
+        message: 0
+      },
+      components:{
+        cpn
+      },
+      methods:{
+        crease(item){
+          this.message = item
+        }
+      }
+    })
+  
+  </script>
+</body>
+</html>
